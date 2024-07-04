@@ -550,11 +550,11 @@ class DataAnnotation:
                     'up': {
                         'disabled': False,
                         'rendered': ''
-                    },
+                        },
                     'down': {
                         'disabled': False,
                         'rendered': ''
-                    },
+                        },
                     'save': {
                         'disabled': False,
                         'rendered': ''
@@ -573,7 +573,7 @@ class DataAnnotation:
                 css=css
             )
 
-            rows = response['selected_rows']
+            rows = response.get('selected_rows', [])
             if len(rows) == 0 and result_rects.current_rect_index > -1:
                 for i, row in enumerate(data):
                     if row['id'] == result_rects.current_rect_index:
@@ -647,6 +647,7 @@ class DataAnnotation:
                     json.dump(result_rects.rects_data, f, indent=2)
                 st.session_state[model.rects_file] = result_rects.rects_data
                 st.experimental_rerun()
+
 
 
     def export_labels(self, model):

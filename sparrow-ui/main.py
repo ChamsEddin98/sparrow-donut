@@ -15,7 +15,7 @@ from views.about import About
 import streamlit_javascript as st_js
 
 st.set_page_config(
-    page_title="Sparrow",
+    page_title="Wind-Invoice-OCR",
     page_icon="favicon.ico",
     layout="wide"
 )
@@ -24,7 +24,7 @@ load_css()
 
 
 class Model:
-    menuTitle = "Sparrow"
+    menuTitle = "Wind-Invoice-OCR"
     option1 = "Dashboard"
     option2 = "Data Annotation"
     option3 = "Model Training"
@@ -48,8 +48,8 @@ class Model:
 def view(model):
     with st.sidebar:
         menuItem = option_menu(model.menuTitle,
-                               [model.option1, model.option2, model.option5, model.option6, model.option7, model.option8],
-                               icons=[model.icon1, model.icon2, model.icon5, model.icon6, model.icon7, model.icon8],
+                               [ model.option2, model.option5, model.option6, model.option7],
+                               icons=[ model.icon2, model.icon5, model.icon6, model.icon7],
                                menu_icon=model.menuIcon,
                                default_index=0,
                                styles={
@@ -60,9 +60,7 @@ def view(model):
                                    "nav-link-selected": {"background-color": "#037ffc"},
                                })
 
-    if menuItem == model.option1:
-        Dashboard().view(Dashboard.Model())
-        logout_widget()
+ 
 
     if menuItem == model.option2:
         if 'ui_width' not in st.session_state or 'device_type' not in st.session_state or 'device_width' not in st.session_state:
@@ -84,9 +82,11 @@ def view(model):
                 st.session_state['device_width'] = device_width
 
                 st.experimental_rerun()
+            
         else:
             DataAnnotation().view(DataAnnotation.Model(), st.session_state['ui_width'], st.session_state['device_type'],
                                   st.session_state['device_width'])
+            
         logout_widget()
 
     if menuItem == model.option3:
